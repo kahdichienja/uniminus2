@@ -31,9 +31,6 @@
                 {% endif %}
             </div>
             <!-- start widget -->
-
-            {% if user_profile.email %}
-            {% else %}
             <div class="row">
                 <div class="col-md-12">
                     <!-- BEGIN PROFILE CONTENT -->
@@ -77,6 +74,9 @@
                                     <!-- Tab panes -->
                                     <div class="tab-content">
                                         <div class="tab-pane active fontawesome-demo" id="tab1">
+                                            {% if user_profile.email %}
+                                            <p>Already Filled</p>
+                                            {% else %}
                                             <div id="biography">
                                                 <div class="row">
                                                     <div class="col-sm-12">
@@ -107,6 +107,94 @@
                                                                     </ul>
                                                                 </div>
                                                                 <div class="card-body row">
+                                                                    <div class="col-lg-4 p-t-20">
+                                                                        <div
+                                                                            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                                                            {{ form.id_passport_no }}
+                                                                            <label class="mdl-textfield__label">Id or
+                                                                                Passport No.</label>
+                                                                            <span class="mdl-textfield__error">Enter
+                                                                                Valid id passport number!</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 p-t-20">
+                                                                        <div
+                                                                            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                                                            {{ form.birth_cert_no }}
+                                                                            <label class="mdl-textfield__label">Birth
+                                                                                Certificate No.</label>
+                                                                            <span class="mdl-textfield__error">Enter
+                                                                                Valid Birth Certificate number!</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 p-t-20">
+                                                                        <div
+                                                                            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                                                            {{ form.ethinicity }}
+                                                                            <label
+                                                                                class="mdl-textfield__label">Ethinicity</label>
+                                                                            <span class="mdl-textfield__error">Enter
+                                                                                Valid ethinicity!</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 p-t-20">
+                                                                        <div
+                                                                            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                                                            {{ form.nationality }}
+                                                                            <label class="mdl-textfield__label">Country
+                                                                                / Nationality</label>
+                                                                            <span class="mdl-textfield__error">Enter
+                                                                                Valid Country!</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 p-t-20">
+                                                                        <div
+                                                                            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                                                            {{ form.phone_number }}
+                                                                            <label class="mdl-textfield__label"
+                                                                                for="text5">Mobile Number</label>
+                                                                            <span class="mdl-textfield__error">Phone
+                                                                                Number required!</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 p-t-20">
+                                                                        <div
+                                                                            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                                                            {{ form.phone_number2 }}
+                                                                            <label class="mdl-textfield__label">Second
+                                                                                Phone No.</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 p-t-20">
+                                                                        <div
+                                                                            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                                                            {{ form.postalcode }}
+                                                                            <label class="mdl-textfield__label">Postal
+                                                                                Code.</label>
+                                                                            <span class="mdl-textfield__error">Enter
+                                                                                Valid Postal Code!</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 p-t-20">
+                                                                        <div
+                                                                            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                                                            {{ form.box }}
+                                                                            <label class="mdl-textfield__label">P.O Box
+                                                                                Of Your Area</label>
+                                                                            <span class="mdl-textfield__error">Enter
+                                                                                Valid Box number Address!</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4 p-t-20">
+                                                                        <div
+                                                                            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                                                            {{ form.town }}
+                                                                            <label class="mdl-textfield__label">Town /
+                                                                                City</label>
+                                                                            <span class="mdl-textfield__error">Enter
+                                                                                Valid Towns!</span>
+                                                                        </div>
+                                                                    </div>
                                                                     <div class="col-lg-4 p-t-20">
                                                                         <div
                                                                             class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
@@ -212,22 +300,12 @@
                                                                             </ul>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-lg-4 p-t-20">
-                                                                        <div
-                                                                            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                                                            {{ form.phone_number }}
-                                                                            <label class="mdl-textfield__label"
-                                                                                for="text5">Mobile Number</label>
-                                                                            <span class="mdl-textfield__error">Number
-                                                                                required!</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-4 p-t-20">
+                                                                    <div class="col-lg-12 p-t-20">
                                                                         <div
                                                                             class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                                                                             {{ form.dob }}
-                                                                            <label class="mdl-textfield__label">Birth
-                                                                                Date</label>
+                                                                            <label class="mdl-textfield__label">Date Of
+                                                                                Birth</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-12 p-t-20">
@@ -236,6 +314,39 @@
                                                                         </label>
                                                                         <div class="col-md-12">
                                                                             {{ form.profile_picture }}
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-lg-12 p-t-20">
+                                                                        <div
+                                                                            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                                                                            {{ form.physicaly_impaired }}
+                                                                            <label for="physicaly_impaired"
+                                                                                class="pull-right margin-0">
+                                                                                <i
+                                                                                    class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                                                                            </label>
+                                                                            <label for="physicaly_impaired"
+                                                                                class="mdl-textfield__label">Physicaly
+                                                                                impaired</label>
+                                                                            <ul data-mdl-for="physicaly_impaired"
+                                                                                class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                                                                                <li class="mdl-menu__item"
+                                                                                    data-val="DE">No</li>
+                                                                                <li class="mdl-menu__item"
+                                                                                    data-val="BY">Yes</li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-12 p-t-20">
+                                                                        <div
+                                                                            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                                                            {{ form.physicaly_impaired_details }}
+                                                                            <label class="mdl-textfield__label">Provide
+                                                                                Details If physicaly impaired.(if No
+                                                                                type NA)</label>
+                                                                            <span class="mdl-textfield__error">Enter
+                                                                                Valid Details!</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-12 p-t-20 text-center">
@@ -250,9 +361,14 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            {% endif %}
                                         </div>
                                         <div class="tab-pane" id="tab2">
                                             <div class="container-fluid">
+
+                                                {% if referee_coount == 2 %}
+                                                Already Filled
+                                                {% else %}
                                                 <div class="row">
                                                     <div class="col-sm-12">
                                                         <form action="{% url 'profile_create' %}" method="POST"
@@ -285,10 +401,10 @@
                                                                     <div class="col-lg-4 p-t-20">
                                                                         <div
                                                                             class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                                                            {{ form.email }}
+                                                                            {{ refereeForm.referee_name }}
                                                                             <!-- replace here with name not email -->
-                                                                            <label
-                                                                                class="mdl-textfield__label">Name</label>
+                                                                            <label class="mdl-textfield__label">Referee
+                                                                                Name</label>
                                                                             <span class="mdl-textfield__error">Enter
                                                                                 Valid Name!</span>
                                                                         </div>
@@ -296,7 +412,7 @@
                                                                     <div class="col-lg-4 p-t-20">
                                                                         <div
                                                                             class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                                                            {{ form.phone_number }}
+                                                                            {{ refereeForm.phone_number }}
                                                                             <!-- replace here with mobile number -->
                                                                             <label class="mdl-textfield__label"
                                                                                 for="text5">Mobile Number</label>
@@ -308,10 +424,10 @@
                                                                     <div class="col-lg-4 p-t-20">
                                                                         <div
                                                                             class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                                                            {{ form.phone_number }}
+                                                                            {{ refereeForm.telepnone }}
                                                                             <!-- replace here with name telephone -->
                                                                             <label class="mdl-textfield__label"
-                                                                                for="text5">Mobile Number</label>
+                                                                                for="text5">Telephone Number</label>
                                                                             <span class="mdl-textfield__error">Number
                                                                                 required!</span>
                                                                         </div>
@@ -319,7 +435,7 @@
                                                                     <div class="col-lg-4 p-t-20">
                                                                         <div
                                                                             class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                                                            {{ form.email }}
+                                                                            {{ refereeForm.email }}
                                                                             <!-- replace here with email -->
                                                                             <label
                                                                                 class="mdl-textfield__label">Email</label>
@@ -330,10 +446,10 @@
                                                                     <div class="col-lg-4 p-t-20">
                                                                         <div
                                                                             class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                                                            {{ form.email }}
+                                                                            {{ refereeForm.postalcode }}
                                                                             <!-- replace here with postal address -->
                                                                             <label class="mdl-textfield__label">Postal
-                                                                                Address</label>
+                                                                                Code / Address</label>
                                                                             <span class="mdl-textfield__error">Enter
                                                                                 Valid Address!</span>
                                                                         </div>
@@ -349,10 +465,14 @@
                                                         </form>
                                                     </div>
                                                 </div>
+                                                {% endif %}
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="tab3">
                                             <div class="container-fluid">
+                                                {% if referee_coount == 2 %}
+                                                Already Filled
+                                                {% else %}
                                                 <div class="row">
                                                     <div class="col-sm-12">
                                                         <form action="{% url 'profile_create' %}" method="POST"
@@ -385,10 +505,10 @@
                                                                     <div class="col-lg-4 p-t-20">
                                                                         <div
                                                                             class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                                                            {{ form.email }}
+                                                                            {{ refereeForm.referee_name }}
                                                                             <!-- replace here with name not email -->
-                                                                            <label
-                                                                                class="mdl-textfield__label">Name</label>
+                                                                            <label class="mdl-textfield__label">Referee
+                                                                                Name</label>
                                                                             <span class="mdl-textfield__error">Enter
                                                                                 Valid Name!</span>
                                                                         </div>
@@ -396,7 +516,7 @@
                                                                     <div class="col-lg-4 p-t-20">
                                                                         <div
                                                                             class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                                                            {{ form.phone_number }}
+                                                                            {{ refereeForm.phone_number }}
                                                                             <!-- replace here with mobile number -->
                                                                             <label class="mdl-textfield__label"
                                                                                 for="text5">Mobile Number</label>
@@ -408,10 +528,10 @@
                                                                     <div class="col-lg-4 p-t-20">
                                                                         <div
                                                                             class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                                                            {{ form.phone_number }}
+                                                                            {{ refereeForm.telepnone }}
                                                                             <!-- replace here with name telephone -->
                                                                             <label class="mdl-textfield__label"
-                                                                                for="text5">Mobile Number</label>
+                                                                                for="text5">Telephone Number</label>
                                                                             <span class="mdl-textfield__error">Number
                                                                                 required!</span>
                                                                         </div>
@@ -419,7 +539,7 @@
                                                                     <div class="col-lg-4 p-t-20">
                                                                         <div
                                                                             class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                                                            {{ form.email }}
+                                                                            {{ refereeForm.email }}
                                                                             <!-- replace here with email -->
                                                                             <label
                                                                                 class="mdl-textfield__label">Email</label>
@@ -430,10 +550,10 @@
                                                                     <div class="col-lg-4 p-t-20">
                                                                         <div
                                                                             class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                                                            {{ form.email }}
+                                                                            {{ refereeForm.postalcode }}
                                                                             <!-- replace here with postal address -->
                                                                             <label class="mdl-textfield__label">Postal
-                                                                                Address</label>
+                                                                                Code / Address</label>
                                                                             <span class="mdl-textfield__error">Enter
                                                                                 Valid Address!</span>
                                                                         </div>
@@ -449,10 +569,14 @@
                                                         </form>
                                                     </div>
                                                 </div>
+                                                {% endif %}
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="tab4">
                                             <div class="container-fluid">
+                                                {% if user_profile.name_and_address_of_school_attended_o_level %}
+                                                <p>Already Filled</p>
+                                                {% else %}
                                                 <div class="row">
                                                     <div class="col-sm-12">
                                                         <form action="{% url 'profile_create' %}" method="POST"
@@ -485,7 +609,7 @@
                                                                     <div class="col-lg-4 p-t-20">
                                                                         <div
                                                                             class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                                                            {{ form.email }}
+                                                                            {{ studentQualificationForm.name_and_address_of_school_attended_o_level }}
                                                                             <!-- replace name_and_address_of_the_school -->
                                                                             <label class="mdl-textfield__label">Name and
                                                                                 Address of the school</label>
@@ -497,7 +621,7 @@
                                                                     <div class="col-lg-4 p-t-20">
                                                                         <div
                                                                             class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                                                            {{ form.phone_number }}
+                                                                            {{ studentQualificationForm.kcse_mean_grade }}
                                                                             <!-- replace with kcse mean grade -->
                                                                             <label class="mdl-textfield__label"
                                                                                 for="text5">KCSE maean Grade</label>
@@ -508,7 +632,7 @@
                                                                     <div class="col-lg-4 p-t-20">
                                                                         <div
                                                                             class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                                                            {{ form.phone_number }}
+                                                                            {{ studentQualificationForm.other_institution_attended }}
                                                                             <!-- Other Institution Attended and Qualification Attained {it is not a required field}-->
                                                                             <label class="mdl-textfield__label"
                                                                                 for="text5">Other Institution Attended
@@ -526,10 +650,14 @@
                                                         </form>
                                                     </div>
                                                 </div>
+                                                {% endif %}
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="tab5">
                                             <div class="container-fluid">
+                                                {% if user.qualifications.details %}
+                                                <p>Already Filled</p>
+                                                {% else %}
                                                 <div class="row">
                                                     <div class="col-sm-12">
                                                         <form action="{% url 'profile_create' %}" method="POST"
@@ -562,7 +690,7 @@
                                                                     <div class="col-lg-12 p-t-20">
                                                                         <div
                                                                             class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                                                            <textarea class="mdl-textfield__input" id="text7"></textarea>
+                                                                            {{qualificationsForm.details}}
                                                                             <label class="mdl-textfield__label">
                                                                                 Make A Qualification Report Here ...
                                                                             </label>
@@ -579,6 +707,7 @@
                                                         </form>
                                                     </div>
                                                 </div>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
@@ -589,7 +718,6 @@
                     <!-- END PROFILE CONTENT -->
                 </div>
             </div>
-            {% endif %}
 
             <!-- end widget -->
             <!-- start widget -->

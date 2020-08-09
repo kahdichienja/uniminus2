@@ -2,7 +2,8 @@ from django import forms
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from accounts.models import UserRegistration, UserRUCF1, UserRUM,UserRUCF2,UserRUCA1
+from accounts.models import UserRegistration, UserRUCF1, UserRUM,UserRUCF2,UserRUCA1, Referee, Qualifications
+
 
 class UserRUCF1Form(forms.ModelForm):
     f1form = forms.FileField(widget=forms.FileInput(
@@ -60,14 +61,68 @@ class UserRegistrationForm(forms.ModelForm):
         attrs={'class': 'mdl-textfield__input', 'id': 'dateOfBirth', 'required': 'true'}))
     profile_picture = forms.FileField(widget=forms.FileInput(
         attrs={'class': 'dropzone', 'id': 'picture', 'accept': 'image/*', 'required': 'true'}))
-
+    id_passport_no = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'mdl-textfield__input', 'id': 'id_passport_no', 'required': 'true'}))
+    birth_cert_no = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'mdl-textfield__input', 'id': 'birth_cert_no', 'required': 'true'}))
+    ethinicity  = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'mdl-textfield__input', 'id': 'ethinicity', 'required': 'true'}))
+    nationality  = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'mdl-textfield__input', 'id': 'nationality', 'required': 'true'}))
+    physicaly_impaired  = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'mdl-textfield__input', 'id': 'physicaly_impaired', 'tabIndex': '-1', 'readonly': 'true','required': 'true'}))
+    physicaly_impaired_details  = forms.CharField(widget=forms.Textarea(
+        attrs={'class': 'mdl-textfield__input', 'id': 'physicaly_impaired_details', 'required': 'true'}))
+    phone_number2  = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'mdl-textfield__input', 'id': 'phone_number2'}))
+    postalcode  = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'mdl-textfield__input', 'id': 'postalcode', 'required': 'true'}))
+    box  = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'mdl-textfield__input', 'id': 'box', 'required': 'true'}))
+    town  = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'mdl-textfield__input', 'id': 'town', 'required': 'true'}))
     class Meta:
         
         """Meta definition for UserRegistrationform."""
 
         model = UserRegistration
-        fields = ['email','joined_date','gender','salutation','religion','mstatus','phone_number','dob','profile_picture']
-
+        fields = [
+            'id_passport_no', #
+            'birth_cert_no', #
+            'ethinicity', #
+            'nationality', #
+            'physicaly_impaired', #
+            'physicaly_impaired_details', #
+            'phone_number2', #
+            'postalcode', #
+            'box', #
+            'town', #
+            'email',
+            'joined_date',
+            'gender',
+            'salutation',
+            'religion',
+            'mstatus',
+            'phone_number',
+            'dob',
+            'profile_picture'
+        ]
+class StudentQualificationForm(forms.ModelForm):
+    name_and_address_of_school_attended_o_level = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'mdl-textfield__input', 'id': 'name_and_address_of_school_attended_o_level', 'required': 'true'}))
+    kcse_mean_grade = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'mdl-textfield__input', 'id': 'kcse_mean_grade', 'required': 'true'}))
+    other_institution_attended = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'mdl-textfield__input', 'id': 'other_institution_attended'}))
+    class Meta:
+        model = UserRegistration
+        fields = ['name_and_address_of_school_attended_o_level','kcse_mean_grade','other_institution_attended']
+class QualificationsForm(forms.ModelForm):
+    details = forms.CharField(widget=forms.Textarea(
+        attrs={'class': 'mdl-textfield__input', 'id': 'details', 'required': 'true'}))
+    class Meta:
+        model = Qualifications
+        fields = ['details']
 
 class RegistrationForm(forms.ModelForm):
     index_number_year  = forms.CharField(widget=forms.TextInput(
@@ -95,22 +150,25 @@ class RegistrationForm(forms.ModelForm):
 
         model = UserRegistration
         fields = ['index_number_year', 'student_name', 'box', 'school', 'town', 'postalcode']
-# class StudentProfileForm(forms.ModelForm):
-#     """Form definition for StudentProfile."""
-#     first_name = forms.CharField(widget=forms.TextInput(
-#         attrs={'class': 'mdl-textfield__input', 'id': 'first_name', 'required': 'true'}))
-#     surname = forms.CharField(widget=forms.TextInput(
-#         attrs={'class': 'mdl-textfield__input', 'id': 'surname', 'required': 'true'}))
-#     last_name = forms.CharField(widget=forms.TextInput(
-#         attrs={'class': 'mdl-textfield__input', 'id': 'last_name', 'required': 'true'}))
-#     adm_number = forms.CharField(widget=forms.TextInput(
-#         attrs={'class': 'mdl-textfield__input', 'id': 'adm_number', 'required': 'true'}))
+class RefereeForm(forms.ModelForm):
+    """Form definition for Referee."""
+    referee_name = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'mdl-textfield__input', 'id': 'referee_name', 'required': 'true'}))
+    phone_number = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'mdl-textfield__input', 'id': 'phone_number', 'pattern': '-?[0-9]*(\.[0-9]+)?', 'required': 'true'}))
+    telepnone = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'mdl-textfield__input', 'id': 'telepnone','pattern': '-?[0-9]*(\.[0-9]+)?', 'required': 'true'}))
+    email = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'mdl-textfield__input', 'id': 'email', 'required': 'true'}))
 
-#     class Meta:
-#         """Meta definition for StudentProfileform."""
+    postalcode = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'mdl-textfield__input', 'id': 'postalcode', 'required': 'true'}))
 
-#         model = StudentProfile
-#         fields = ['first_name','surname','last_name','adm_number']
+    class Meta:
+        """Meta definition for Refereeform."""
+
+        model = Referee
+        fields = ['referee_name','phone_number','telepnone','email', 'postalcode']
 
 # class UserRegisterForm(UserCreationForm):
 #     email = forms.EmailField(widget=forms.TextInput(

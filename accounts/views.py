@@ -7,8 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
-from accounts.forms import UserLoginForm, UserRegistrationForm, UserRUCF1Form,UserRUMForm, UserRUCF2Form, UserRUCA1Form, CreateStudentForm, RegistrationForm#, StudentProfileForm, StudentProfileAttributeForm
-from accounts.models import UserRegistration,UserRUCF1,UserRUM,UserRUCF2,UserRUCA1
+from accounts.forms import QualificationsForm,UserLoginForm, RefereeForm,StudentQualificationForm,UserRegistrationForm, UserRUCF1Form,UserRUMForm, UserRUCF2Form, UserRUCA1Form, CreateStudentForm, RegistrationForm#, StudentProfileForm, StudentProfileAttributeForm
+from accounts.models import UserRegistration,UserRUCF1,UserRUM,UserRUCF2,UserRUCA1, Referee
 # Create your views here.
 
 def user_login(request):
@@ -87,13 +87,18 @@ def user_create_profile(request):
     try:
         template_name = 'user/create_profile.html'
         user_profile = UserRegistration.objects.get(user = request.user.userregistration.user)
+        referee_coount = Referee.objects.filter(user = request.user).count()
         context['user_profile'] = user_profile
+        context['referee_coount'] = referee_coount
         if request.method == 'POST':
             form = UserRegistrationForm(request.POST, request.FILES, instance = user_profile)
             userRUCF1Form = UserRUCF1Form(request.POST, request.FILES)
             userRUMForm = UserRUMForm(request.POST, request.FILES)
             userRUCF2Form = UserRUCF2Form(request.POST, request.FILES)
             userRUCA1Form = UserRUCA1Form(request.POST, request.FILES)
+            refereeForm = RefereeForm(request.POST)
+            studentQualificationForm = StudentQualificationForm(request.POST, instance = user_profile)
+            qualificationsForm = QualificationsForm(request.POST)
             
             # TODO: implement UserRUCF1Form reg
             if userRUCF1Form.is_valid():
@@ -101,6 +106,16 @@ def user_create_profile(request):
                 obj.user_id = request.user.id
                 obj.save()
                 messages.success(request, f'RUCF1 Form Upload was successful')
+                return redirect('/user/create/')
+            elif studentQualificationForm.is_valid():
+                studentQualificationForm.save()
+                messages.success(request, f'Student Qualification Added successful')
+                return redirect('/user/create/')
+            elif qualificationsForm.is_valid():
+                obj = qualificationsForm.save(commit = False)
+                obj.user = request.user
+                obj.save()
+                messages.success(request, f'Professional Qualification Added successful')
                 return redirect('/user/create/')
             elif userRUCA1Form.is_valid():
                 obj = userRUCA1Form.save(commit=False)
@@ -118,6 +133,12 @@ def user_create_profile(request):
                 form.save() 
                 messages.success(request, f'Update was successful')
                 return redirect('/user/create/')
+            elif refereeForm.is_valid():
+                obj = refereeForm.save(commit = False)
+                obj.user = request.user
+                obj.save()
+                messages.success(request, f'Referee Added successful')
+                return redirect('/user/create/')
             elif userRUMForm.is_valid():
                 obj = userRUMForm.save(commit=False)
                 obj.user_id = request.user.id
@@ -133,12 +154,17 @@ def user_create_profile(request):
             userRUMForm = UserRUMForm()
             userRUCF2Form = UserRUCF2Form()
             userRUCA1Form = UserRUCA1Form()
-
+            refereeForm = RefereeForm()
+            studentQualificationForm = StudentQualificationForm()
+            qualificationsForm = QualificationsForm()
             context['userRUCA1Form'] = userRUCA1Form
             context['userRUCF2Form'] = userRUCF2Form
             context['userRUMForm'] = userRUMForm
             context['form'] = form
             context['userRUCF1Form'] = userRUCF1Form
+            context['refereeForm'] = refereeForm
+            context['studentQualificationForm'] = studentQualificationForm
+            context['qualificationsForm'] = qualificationsForm
 
 
         return render(request, template_name, context)
