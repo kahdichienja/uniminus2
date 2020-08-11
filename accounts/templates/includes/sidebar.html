@@ -45,6 +45,7 @@
                         <i class="material-icons open">arrow_drop_down</i>
                     </a>
                     <ul class="sub-menu">
+                        {% if user.userregistration.profile_picture %}
                         <li class="nav-item">
                             <a href="{% url 'profile' %}" class="nav-link">
                                 <i class="material-icons">person_pin</i>
@@ -52,6 +53,8 @@
                                 <span class="selected"></span>
                             </a>
                         </li>
+                        {% else %}
+                        {% endif %}
                         <li class="nav-item">
                             <a href="{% url 'profile_create' %}" class="nav-link">
                                 <i class="material-icons">mode_edit</i>

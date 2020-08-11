@@ -44,6 +44,10 @@ def user_register(request):
     template_name = 'Ouarth/register.html'
     return render(request, template_name, {})
 
+
+
+
+
 @login_required(login_url='/user/login/')
 def user_account_profile(request):
     context = {}
@@ -79,9 +83,44 @@ def user_account_profile(request):
         messages.warning(request, f'Please Contant Administration It Seems That Your Datails Is Not Captured Correctly.')
         return redirect('/user/logout/')
 
+# new form
+@login_required(login_url='/user/login/')
+def userRUCF1Formview(request):
+    context = {}
+    userRUCF1Form = UserRUCF1Form()
+    context['userRUCF1Form'] = userRUCF1Form
+    template_name = 'user/userRUCF1create_profile.html'
+    return render(request, template_name, context)
+
+@login_required(login_url='/user/login/')
+def userRUMFormview(request):
+    context = {}
+    userRUMForm = UserRUMForm()
+    context['userRUMForm'] = userRUMForm
+    template_name = 'user/userRUMcreate_profile.html'
+    return render(request, template_name, context)
+
+@login_required(login_url='/user/login/')
+def userRUCF2Formview(request):
+    context = {}
+    userRUCF2Form = UserRUCF2Form()
+    context['userRUCF2Form'] = userRUCF2Form
+    template_name = 'user/userRUCF2create_profile.html'
+    return render(request, template_name, context)
+
+@login_required(login_url='/user/login/')
+def userRUCA1Formview(request):
+    context = {}
+    userRUCA1Form = UserRUCA1Form()
+    context['userRUCA1Form'] = userRUCA1Form
+    template_name = 'user/userRUCA1create_profile.html'
+    return render(request, template_name, context)
+
+# end new form
 
 @login_required(login_url='/user/login/')
 def user_create_profile(request):
+    template_name = 'user/create_profile.html'
     context = {}
     
     try:
@@ -112,7 +151,7 @@ def user_create_profile(request):
                 obj.user_id = request.user.id
                 obj.save()
                 messages.success(request, f'RUCF1 Form Upload was successful')
-                return redirect('/user/create/')
+                return redirect('/user/userRUM/')
 
 
             # new
@@ -122,7 +161,7 @@ def user_create_profile(request):
                 obj.save()
 
                 messages.success(request, f'Personal FileUpload was successful')
-                return redirect('/user/create/')
+                return redirect('/user/userRUCF1/')
             # end new
 
 
@@ -135,19 +174,20 @@ def user_create_profile(request):
                 obj.user = request.user
                 obj.save()
                 messages.success(request, f'Professional Qualification Added successful')
-                return redirect('/user/create/')
+                return redirect('/user/userRUCF1/')
             elif userRUCA1Form.is_valid():
                 obj = userRUCA1Form.save(commit=False)
                 obj.user_id = request.user.id
                 obj.save()
-                messages.success(request, f'RUC A1 Form Upload was successful')
-                return redirect('/user/create/')
+                messages.success(request, f'RUC A1 Form Upload was successful. Thank You For Choosing Rongo University.')
+                return redirect('/user/')
+
             elif userRUCF2Form.is_valid():
                 obj = userRUCF2Form.save(commit=False)
                 obj.user_id = request.user.id
                 obj.save()
                 messages.success(request, f'RUCF2 Form Upload was successful')
-                return redirect('/user/create/')
+                return redirect('/user/userRUCA1/')
             elif form.is_valid():
                 form.save() 
                 messages.success(request, f'Update was successful')
@@ -163,7 +203,7 @@ def user_create_profile(request):
                 obj.user_id = request.user.id
                 obj.save()
                 messages.success(request, f'RU M Form Upload was successful')
-                return redirect('/user/create/')
+                return redirect('/user/userRUCF2/')
             else:
                 messages.warning(request, f'Update Failed, Fill All The fields')
                 return redirect('/user/create/')
