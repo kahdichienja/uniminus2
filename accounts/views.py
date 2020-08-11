@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
-from accounts.forms import QualificationsForm,UserLoginForm, RefereeForm,StudentQualificationForm,UserRegistrationForm, UserRUCF1Form,UserRUMForm, UserRUCF2Form, UserRUCA1Form, CreateStudentForm, RegistrationForm#, StudentProfileForm, StudentProfileAttributeForm
+from accounts.forms import PersonalFileUploadForm,QualificationsForm,UserLoginForm, RefereeForm,StudentQualificationForm,UserRegistrationForm, UserRUCF1Form,UserRUMForm, UserRUCF2Form, UserRUCA1Form, CreateStudentForm, RegistrationForm#, StudentProfileForm, StudentProfileAttributeForm
 from accounts.models import UserRegistration,UserRUCF1,UserRUM,UserRUCF2,UserRUCA1, Referee
 # Create your views here.
 
@@ -99,7 +99,13 @@ def user_create_profile(request):
             refereeForm = RefereeForm(request.POST)
             studentQualificationForm = StudentQualificationForm(request.POST, instance = user_profile)
             qualificationsForm = QualificationsForm(request.POST)
-            
+
+
+            # new
+            personalFileUploadForm = PersonalFileUploadForm(request.POST, request.FILES)
+            # end new
+
+
             # TODO: implement UserRUCF1Form reg
             if userRUCF1Form.is_valid():
                 obj = userRUCF1Form.save(commit=False)
@@ -107,6 +113,19 @@ def user_create_profile(request):
                 obj.save()
                 messages.success(request, f'RUCF1 Form Upload was successful')
                 return redirect('/user/create/')
+
+
+            # new
+            elif personalFileUploadForm.is_valid():
+                obj = personalFileUploadForm.save(commit = False)
+                obj.user_id = request.user.id
+                obj.save()
+
+                messages.success(request, f'Personal FileUpload was successful')
+                return redirect('/user/create/')
+            # end new
+
+
             elif studentQualificationForm.is_valid():
                 studentQualificationForm.save()
                 messages.success(request, f'Student Qualification Added successful')
@@ -157,6 +176,9 @@ def user_create_profile(request):
             refereeForm = RefereeForm()
             studentQualificationForm = StudentQualificationForm()
             qualificationsForm = QualificationsForm()
+            # new
+            personalFileUploadForm = PersonalFileUploadForm()
+            # end new
             context['userRUCA1Form'] = userRUCA1Form
             context['userRUCF2Form'] = userRUCF2Form
             context['userRUMForm'] = userRUMForm
@@ -165,6 +187,11 @@ def user_create_profile(request):
             context['refereeForm'] = refereeForm
             context['studentQualificationForm'] = studentQualificationForm
             context['qualificationsForm'] = qualificationsForm
+
+            # new
+            context['personalFileUploadForm'] = personalFileUploadForm
+            # end new
+
 
 
         return render(request, template_name, context)

@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from accounts.models import UserRegistration, UserRUCF1, UserRUM,UserRUCF2,UserRUCA1, Referee, Qualifications
+from accounts.models import UserRegistration, UserRUCF1, UserRUM,UserRUCF2,UserRUCA1, Referee, Qualifications, PersonalFileUpload
 
 
 class UserRUCF1Form(forms.ModelForm):
@@ -123,6 +123,37 @@ class QualificationsForm(forms.ModelForm):
     class Meta:
         model = Qualifications
         fields = ['details']
+
+# new
+
+class PersonalFileUploadForm(forms.ModelForm):
+    """Form definition for PersonalFileUpload."""
+
+    adm_letter = forms.FileField(widget=forms.FileInput(
+        attrs={'class': 'dropzone', 'id': 'f1form', 'required': 'true'}))
+    birth_cert = forms.FileField(widget=forms.FileInput(
+        attrs={'class': 'dropzone', 'id': 'birth_cert', 'required': 'true'}))
+    kcse_cert = forms.FileField(widget=forms.FileInput(
+        attrs={'class': 'dropzone', 'id': 'kcse_cert', 'required': 'true'}))
+    result_slip = forms.FileField(widget=forms.FileInput(
+        attrs={'class': 'dropzone', 'id': 'result_slip', 'required': 'true'}))
+    national_id = forms.FileField(widget=forms.FileInput(
+        attrs={'class': 'dropzone', 'id': 'national_id'}))
+    sec_leaving_cert = forms.FileField(widget=forms.FileInput(
+        attrs={'class': 'dropzone', 'id': 'sec_leaving_cert'}))
+        
+
+    class Meta:
+        """Meta definition for PersonalFileUploadform."""
+
+        model = PersonalFileUpload
+        fields = ['adm_letter', 'birth_cert', 'kcse_cert', 'result_slip', 'national_id', 'sec_leaving_cert']
+
+
+# end new
+
+
+
 
 class RegistrationForm(forms.ModelForm):
     index_number_year  = forms.CharField(widget=forms.TextInput(

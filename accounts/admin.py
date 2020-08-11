@@ -9,7 +9,7 @@ class UserRegistrationAdmin(admin.ModelAdmin):
     list_display = ["student_name","index_number_year","school","student_name","joined_date","gender"]
     link_display = ["adm_no"]
     list_filter = ['gender', 'joined_date', 'school']
-
+admin.site.register(PersonalFileUpload)
 admin.site.register(UserRUCA1)
 admin.site.register(UserRUCF1)
 admin.site.register(UserRUCF2)

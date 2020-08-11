@@ -99,6 +99,26 @@ class Qualifications(models.Model):
     def __str__(self):
         return f'{self.user}'
 
+
+class PersonalFileUpload(models.Model):
+    """Model definition for PersonalFileUpload."""
+
+    # TODO: Define fields here
+    user = models.OneToOneField(User, on_delete=models.CASCADE) 
+    adm_letter = models.FileField(upload_to='admletters')
+    birth_cert = models.FileField(upload_to='birthcert')
+    kcse_cert = models.FileField(upload_to='kcsecert', blank=True, null=True)
+    result_slip = models.FileField(upload_to='resultslip')
+    national_id = models.FileField(upload_to='nationalid', blank=True, null=True)
+    sec_leaving_cert = models.FileField(upload_to='leavingcert', blank=True, null=True)
+
+
+    def __str__(self):
+        """Unicode representation of PersonalFileUpload."""
+        return f'{self.user}'
+
+
+
 class Referee(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     referee_name = models.CharField(max_length=100)
